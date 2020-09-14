@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/Users/parkjunha/.local/share/virtualenvs/airbnb-clone-gs8dJqem/bin/python",
+    "python.linting.flake8Enabled" : true,
+    "pythion.linting.pylintEnabled" : false,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Args":["--max-line-length=88"]
+}
