@@ -190,3 +190,4 @@ About
 #mac
 .DS_Store
 uploads/
+secrets.json
