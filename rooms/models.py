@@ -45,6 +45,7 @@ class Facility(AbstractItem):
 
 
 class HouseRule(AbstractItem):
+
     """HouseRule Mdoel Definition"""
 
     class Meta:
@@ -76,7 +77,8 @@ class Room(core_models.TimeStampedModel):
 
     room_type = models.ForeignKey(
         RoomType, related_name="rooms", on_delete=models.SET_NULL, null=True, blank=True
-    )  # Room Type 이 제거된 없어지지 않게 한다.
+    )  # Room Type 이 제거되도 없어지지 않게 한다.
+
     amenities = models.ManyToManyField(Amenity, related_name="rooms", blank=True)
     facilities = models.ManyToManyField(Facility, related_name="rooms", blank=True)
     houseRules = models.ManyToManyField(HouseRule, related_name="rooms", blank=True)

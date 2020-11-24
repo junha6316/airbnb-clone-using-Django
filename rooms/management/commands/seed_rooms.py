@@ -1,6 +1,6 @@
 import random
-from sys import stdout
 
+from sys import stdout
 
 from django_seed import Seed
 from django.core.management.base import BaseCommand
@@ -43,13 +43,32 @@ class Command(BaseCommand):
         # shape을 정리한다.
         created_clean = flatten(list(created_photos.values()))
 
+        amenities = room_model.Amenity.objects.all()
+        facilities = room_model.Facility.objects.all()
+        rules = room_model.HouseRule.objects.all()
+
         for pk in created_clean:
             room = room_model.Room.objects.get(pk=pk)
-            for i in range(3, random.randint(5, 17)):
+            for i in range(3, random.randint(10, 30)):
                 room_model.Photo.objects.create(
                     caption=seeder.faker.sentence(),
                     file=f"/{random.randint(1,31)}.webp",
                     room=room,
                 )
+
+            for a in amenities:
+                num = random.randint(0, 15)
+                if num % 2 == 0:
+                    room.amenities.add(a)  # many to many field에서 추가하는 방법
+
+            for f in facilities:
+                num = random.randint(0, 15)
+                if num % 2 == 0:
+                    room.facilities.add(f)
+
+            for r in rules:
+                num = random.randint(0, 15)
+                if num % 2 == 0:
+                    room.houseRules.add(r)
 
         self.stdout.write(self.style.SUCCESS("Rooms are created"))

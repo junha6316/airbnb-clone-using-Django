@@ -16,18 +16,18 @@ class Reservation(core_models.TimeStampedModel):
         (STATUS_PENDING, "Pending"),
         (STATUS_CONFIRM, "Confirm"),
     )
-    status = models.CharField(
-        max_length=12, choices=STATUS_CHOICES, default=STATUS_PENDING
-    )
+    
+    status = models.CharField(max_length=12, choices=STATUS_CHOICES, default=STATUS_PENDING)
     check_in = models.DateField()
     check_out = models.DateField()
-
     guest = models.ForeignKey("users.User", on_delete=models.CASCADE)
     room = models.ForeignKey("rooms.Room", on_delete=models.CASCADE)
+    
+
 
     def InProgressed(self):
         now = timezone.now().date()
-        return self.check_in < now < self.check_out
+        return self.check_in <= now < self.check_out
 
     InProgressed.boolean = True
 
