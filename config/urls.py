@@ -25,7 +25,9 @@ from rooms import views as room_views
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
     # path("users/", include("users.urls", namespace="users")),
+    path("rooms/", include("rooms.urls", namespace="rooms")),
     path("admin/", admin.site.urls),
+   
 ]
 if settings.DEBUG:  # DEBUG 상태일 때(개발 상태일 때)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

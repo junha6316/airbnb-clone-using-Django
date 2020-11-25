@@ -2,6 +2,7 @@
 
 # Django
 from django.db import models
+from django.urls import reverse
 
 # 3rd Party Apps
 from django_countries.fields import CountryField
@@ -84,10 +85,15 @@ class Room(core_models.TimeStampedModel):
     houseRules = models.ManyToManyField(HouseRule, related_name="rooms", blank=True)
 
     def save(self, *args, **kwargs):  # Room 모델에서 save 함수를 다시 정의한다.
+
         """Override Save Method"""
+
         self.city = str.capitalize(self.city)
         super().save(*args, **kwargs)
         return 0
+
+    def get_absolute_url(self, **kwargs):
+        return reverse("rooms:detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name

@@ -1,17 +1,141 @@
+"""
+Using List View
+"""
+
+from math import ceil
 from datetime import datetime
+
+from django.http import Http404
 from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
+from django_countries import countries
 
-from rooms import models as room_models
+from . import models
+from . import forms
 
 
-# Create your views here.
+class HomeView(ListView):
+
+    """ Home View  Definition """
+
+    model = models.Room
+    paginate_by = 10
+    paginate_orphans = 5
+
+    page_kwarg = "page"
+    ordering = "created"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
-def all_rooms(request):
-    now = datetime.now()
+class RoomDetail(DetailView):
+    model = models.Room
 
-    all_rooms = room_models.Room.objects.all()
 
-    context = {"rooms": all_rooms}
-    return render(request, "rooms/all_rooms.html", context=context)
+def search(request):
+
+    # city = request.GET.get("city", "Anywhere")
+    # city = str.capitalize(city)
+    # country = request.GET.get("country", "KR")
+    # room_type = int(request.GET.get("room_type", 0))
+    # amenity = int(request.GET.get("amenity", 0))
+    # facility = int(request.GET.get("facility", 0))
+    # price = int(request.GET.get("price", 0))
+    # guests = int(request.GET.get("guests", 0))
+    # bedrooms = int(request.GET.get("bedrooms", 0))
+    # beds = int(request.GET.get("beds", 0))
+    # baths = int(request.GET.get("baths", 0))
+    # instant = bool(request.GET.getlist("instant", False))
+    # superhost = bool(request.GET.getlist("superhost", False))
+    # s_amenities = request.GET.getlist("amenities")
+    # s_facilities = request.GET.getlist("facilities")
+
+    # room_types = models.RoomType.objects.all()
+    # amenities = models.Amenity.objects.all()
+    # facilities = models.Facility.objects.all()
+
+    # form = {
+    #     "city": city,
+    #     "s_country": country,
+    #     "s_room_type": room_type,
+    #     "s_amenity": amenity,
+    #     "s_facility": facility,
+    #     "price": price,
+    #     "guests": guests,
+    #     "bedrooms": bedrooms,
+    #     "beds": beds,
+    #     "baths": baths,
+    #     "s_amenities": s_amenities,
+    #     "s_facilities": s_facilities,
+    #     "instant": instant,
+    #     "superhost": superhost
+    # }
+
+    # choice = {
+    #     "countries": countries,
+    #     "room_types": room_types,
+    #     "amenities": amenities,
+    #     "facilities": facilities,
+    # }
+
+    # filter_args = {}
+
+    # if city != "Anywhere":
+    #     filter_args["city__startswith"] = city
+    # filter_args["country"] = country
+    # if room_type != 0:
+    #     filter_args["room_type__pk"] = room_type
+    # if price != 0:
+    #     filter_args["price__lte"] = price
+    # if guests != 0:
+    #     filter_args["guests__gte"] = guests
+
+    # if bedrooms != 0:
+    #     filter_args["bedrooms__gte"] = bedrooms
+
+    # if beds != 0:
+    #     filter_args["beds"] = beds
+
+    # if beds != 0:
+    #     filter_args["baths"] = baths
+
+    # if instant:
+    #     filter_args["instant_book"] = True
+
+    # if superhost:
+    #     filter_args["host__superhost"] = True
+
+    # if len(s_amenities) > 0:
+    #     for s_amenity in s_amenities:
+    #         filter_args["amenities__pk"] = int(s_amenity)
+
+    # if len(s_facilities) > 0:
+    #     for s_facility in s_facilities:
+    #         filter_args["facilities__pk"] = int(s_facility)
+
+    # rooms = models.Room.objects.filter(**filter_args)
+
+    # return render(
+    #     request,
+    #     "rooms/search.html",
+    #     context={**form, **choice, "rooms": rooms},
+    # )
+
+    country = request.GET.get("country")
+
+    if country:
+        form = forms.SearchForm(request.GET)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = forms.SearchForm()
+
+    return render(
+        request,
+        "rooms/search.html",
+        context={"forms": form},
+    )
