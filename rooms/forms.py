@@ -6,7 +6,6 @@ from . import models
 class SearchForm(forms.Form):
     city = forms.CharField(initial="Anywhere")
     country = CountryField(default="KR").formfield()
-
     room_type = forms.ModelChoiceField(
         required=False, empty_label="Any kind", queryset=models.RoomType.objects.all()
     )
@@ -18,12 +17,13 @@ class SearchForm(forms.Form):
     instant_book = forms.BooleanField(required=False)
     superhost = forms.BooleanField(required=False)
 
-    amenities = forms.ModelChoiceField(
+    amenities = forms.ModelMultipleChoiceField(
         required=False,
         queryset=models.Amenity.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
-    facilities = forms.ModelChoiceField(
+    
+    facilities = forms.ModelMultipleChoiceField(
         required=False,
         queryset=models.Facility.objects.all(),
         widget=forms.CheckboxSelectMultiple,

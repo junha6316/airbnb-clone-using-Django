@@ -4,6 +4,7 @@
 {% block title %} Home {% endblock title %}
 
 {% block content %} 
+
     {% for room in object_list %}
         <h4>
             <a href="{% url 'rooms:detail' room.pk %}"> 
