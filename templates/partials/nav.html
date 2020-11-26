@@ -1,0 +1,17 @@
+
+<a href="{% url 'core:core'}" %>Jbnb</a>
+    <ul>
+        
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'users:login' %}">Log out</a></li>
+        {% else %}
+        <li><a href="{% url 'users:logout' %}">Login</a></li>
+            
+        {% endif %}
+            
+        
+    </ul>
+
+   
+
+
