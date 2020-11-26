@@ -32,8 +32,8 @@ class User(AbstractUser):
     gender = models.CharField("성별", max_length=10, choices=GENDER_CHOICES, blank=True)
     birthdate = models.DateField(null=True)
     language = models.CharField(
-        "언어", max_length=2, default="", choices=LANGUAGE_CHOICES, blank=True
-    )
+        "언어", max_length=2, choices=LANGUAGE_CHOICES, blank=True
+    ,default=LANGUAGE_KOREAN)
     currency = models.CharField(
         "통화", max_length=2, choices=CURRENCY_CHOICES, default=CURRENCY_USD
     )
