@@ -32,6 +32,12 @@ class User(AbstractUser):
     CURRENCY_KRW = "krw"
     CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
 
+    LOGIN_EMAIL = "email"
+    LOGIN_GH = "github"
+    LOGIN_KAKAO = "kakao"
+
+    LOGIN_CHOICES = ((LOGIN_EMAIL, "Email"), (LOGIN_GH, "Github"), (LOGIN_KAKAO, "Kakao"))
+
     username = models.CharField(max_length=120, unique=True)
     bio = models.TextField(default="", blank=True)
     avatar = models.ImageField(upload_to="avartar", blank=True, null=True)
@@ -50,6 +56,7 @@ class User(AbstractUser):
     superhost = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
     email_secret = models.CharField(max_length=120, default="", blank=True)
+    login_method = models.CharField(max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL)
 
     def verify_email(self):
         if self.email_verified is False:
