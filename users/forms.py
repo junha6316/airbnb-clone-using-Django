@@ -38,10 +38,9 @@ class SignUpForm(forms.ModelForm):
             return password
 
     def save(self, *args, **kwargs):
-        user =super().save(commit=False)
-        email = self.cleaned_data.get("username")
+        user =super().save(commit=False) #db에 커밋하지 않은 채로 모델을 불러온다. 
+        email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
-       
         user.username = email
         user.set_password(password)
         user.save()

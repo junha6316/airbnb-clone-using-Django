@@ -147,3 +147,11 @@ MEDIA_URL = "/media/"
 # /media/ => 절대경로
 # uploads folder로 부터 무언가 갖고 오려면 /media/avatar 를 이용해 갖고온다.
 # 무조건 /으로 끝나야 한다.
+
+# Email Configuration
+
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
+EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
+EMAIL_FROM = "noreply@abc.com"
