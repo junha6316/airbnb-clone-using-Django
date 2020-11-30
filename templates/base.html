@@ -2,22 +2,26 @@
 {% load static %}
 <html lang="en">
 <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static  'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %} {% endblock title %}</title>
 </head>
 
-<body>
+<body class="text-gray-800 mt-24">
+    <header class ="container max-w-full flex items-center justify-between px-6 h-20 border-b border-gray-200 fixed bg-white inset-0">
+        <div class ="flex items-center my-2 w-1/3">
+        <a href="{% url 'core:home' %}" class="mr-5" %>
+            <img class="w-8" src="{% static 'img/logo.png' %}" class="mr-6">
+        </a>
     
-    <header class ="container">
-        {% include "partials/nav.html" %} {% include "partials/social_login.html" %} 
         {% block search-bar %}
-        <form method="get " action="{% url 'rooms:search' %} ">
-            <input name='city ' placeholder="Search by City " />
+        <form method="get" action="{% url 'rooms:search' %} " class="w-9/12">
+            <input class="border px-5 py-2 mt-4 rounded-sm w-full text-normal text-gray-900 placeholder-gray-600 font-medium shadow-md hover:shadow-lg transition-property: box-shadow transition duration-200 shadow focus:outline-none" name='city ' placeholder="Search by City " />
         </form>
         {% endblock search-bar %}
+    </div>
+        {% include "partials/nav.html" %} 
 
     </header>
     {% block content %} 

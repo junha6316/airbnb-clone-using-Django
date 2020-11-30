@@ -6,7 +6,6 @@
         "type": "git",
         "url": "git+https://github.com/junha6316/airbnb-clone-using-Django.git"
     },
-
     "scripts": {
         "css": "gulp"
     },

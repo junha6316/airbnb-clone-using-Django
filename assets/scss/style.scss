@@ -1,13 +1,18 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-html{
-    font-size: :10px;
+@tailwind components;
+
+#search-box {
+    transition: box-shadow 10s linear;
 }
-.box{
-    font-size:20px;
-    .child{
-        width: 2em;
+.nav_link {
+    @apply ml-8 border-b-2 border-white  px-2 h-full flex items-center;
+    a {
+        @apply py-8 px-1;
+    }
+    &:hover{
+        @apply border-gray-600;
     }
 }
+@tailwind utilities;
+
