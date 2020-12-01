@@ -109,6 +109,13 @@ class Room(core_models.TimeStampedModel):
         )
 
     Rating_Reviews.short_description = "Avg"
+    
+    def first_photo(self):
+        photo, = self.photos.all()[:1]
+        return photo.file.url
+
+
+
 
 
 class Photo(core_models.TimeStampedModel):
@@ -123,3 +130,6 @@ class Photo(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.caption
+
+
+    
