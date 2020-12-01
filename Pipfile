@@ -9,7 +9,6 @@ flake8 = "*"
 
 [packages]
 django = "==2.2.5"
-black = "*"
 pillow = "*"
 django-countries = "*"
 django-seed = "*"

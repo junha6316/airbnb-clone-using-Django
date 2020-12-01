@@ -192,3 +192,4 @@ About
 uploads/
 secrets.json
 .env
+node_modules
