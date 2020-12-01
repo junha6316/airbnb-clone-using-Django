@@ -1,5 +1,7 @@
+const colors = require("tailwindcss/colors")
 module.exports ={
     theme :{
+        
         extend:{
             spacing:{
                 "25vh" : "25vh",
@@ -8,7 +10,11 @@ module.exports ={
             },
             borderRadius:{
                 xl:"1.5rem"
-            }
+            },
+            colors :{
+                teal :colors.teal
+            },
+            
         }  
     },
     variants : {},

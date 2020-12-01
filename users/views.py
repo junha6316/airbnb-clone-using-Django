@@ -14,9 +14,10 @@ from . import models
 
 
 # Create your views here.
-class LoginView(View):
+class LoginView(FormView):
     template_name = "users/login.html"
     form_class = forms.LoginForm
+
     success_url = reverse_lazy("core:home")
 
     def form_valid(self, form):
@@ -37,12 +38,7 @@ class SignupView(FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")
-    initial = {
-        "first_name": "Nicos",
-        "last_name": "Park",
-        "email": "junha6316@gmail.com",
-    }
-
+  
     def form_valid(self, form):
         form.save()
 
